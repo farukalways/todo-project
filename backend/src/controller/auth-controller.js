@@ -176,4 +176,5 @@ const refreshTokenController = async (req, res, next) => {
 module.exports = {
   registerController,
   loginController,
+  refreshTokenController,
 };

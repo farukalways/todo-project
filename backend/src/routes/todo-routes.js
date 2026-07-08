@@ -1,11 +1,10 @@
-const todoRoute = require("express").Router();
+const {
+  createTodoController,
+} = require("../controller/todo-controller/create-todo-controller");
+const authMiddleware = require("../middleware/authMiddleware");
 
-todoRoute.post("/", async (req, res, next) => {
-  try {
-    const {} = req.body;
-  } catch (error) {
-    next(error);
-  }
-});
+const todoRoutes = require("express").Router();
 
-module.exports = todoRoute;
+todoRoutes.post("/", authMiddleware, createTodoController);
+
+module.exports = todoRoutes;

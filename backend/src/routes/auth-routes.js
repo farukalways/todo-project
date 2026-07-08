@@ -1,13 +1,13 @@
+const authRoutes = require("express").Router();
+
 const {
   registerController,
   loginController,
   refreshTokenController,
 } = require("../controller/auth-controller");
 
-const authRoute = require("express").Router();
+authRoutes.post("/register", registerController);
+authRoutes.post("/login", loginController);
+authRoutes.post("/refresh", refreshTokenController);
 
-authRoute.post("/register", registerController);
-authRoute.post("/login", loginController);
-authRoute.post("/refresh", refreshTokenController);
-
-module.exports = authRoute;
+module.exports = authRoutes;

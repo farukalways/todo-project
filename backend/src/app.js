@@ -1,9 +1,8 @@
 const express = require("express");
-const cors = require("cors");
 
 const app = express();
 
-const indexRoutes = require("./routes/index.routes");
+const indexRoutes = require("./routes/index-routes");
 const globalErrorHandler = require("./error/golobal-error");
 const invalidRouteHandler = require("./error/invalid-route-handler");
 const commonMiddlewares = require("./middleware/common-middleware");

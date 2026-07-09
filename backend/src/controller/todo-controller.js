@@ -80,8 +80,42 @@ const deleteTodoController = async (req, res, next) => {
   }
 };
 
+const toggleTodoCompleteController = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const { isCompleted } = req.body;
+
+    if (isCompleted === undefined) {
+      return res.status(400).json({
+        success: false,
+        message: "Please provide isCompleted status (true or false).",
+      });
+    }
+
+    const updatedTodo = await Todo.findByIdAndUpdate(
+      id,
+      { isCompleted },
+      { new: true },
+    );
+
+    if (!updatedTodo) {
+      return res
+        .status(404)
+        .json({ success: false, message: "Todo not found" });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: `Todo successfully marked as ${updatedTodo.isCompleted ? "completed" : "incomplete"}`,
+      updatedTodo,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
 module.exports = {
   createTodoController,
   updateTodoController,
   deleteTodoController,
+  toggleTodoCompleteController,
 };
